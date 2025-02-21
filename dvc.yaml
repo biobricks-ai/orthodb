@@ -9,19 +9,24 @@
 # dvc repro <stage>
 
 stages:
+  invalidate:
+    cmd: stages/00_invalidate_cache.sh
+    deps:
+      - stages/00_invalidate_cache.sh
+    outs:
+      - list
   download:
     cmd: stages/01_download.sh
     deps:
       - stages/01_download.sh
+      - list
     outs:
       - download
-      - list
   unzip: 
     cmd: stages/02_unzip.sh
     deps:
       - stages/02_unzip.sh
       - download
-      - list
     outs:
       - raw
   build: 
@@ -30,6 +35,5 @@ stages:
       - stages/03_build.sh
       - stages/csv2parquet.sh
       - raw
-      - list
     outs:
       - brick
