@@ -16,9 +16,10 @@ mkdir -p "$downloadpath"
 cd $downloadpath;
 
 # Retrieve the list of files to download from FTP base address
+# NOTE: Not downloading the larger FASTA files for now.
 wget -P "$downloadpath" \
   --mirror -np \
-  -A '*.gz,*.txt' \
+  -A '*.tab.gz,*.txt' \
   --no-host-directories \
   --cut-dirs=2 \
   "$URL"
