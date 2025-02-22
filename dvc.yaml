@@ -22,18 +22,12 @@ stages:
       - list
     outs:
       - download
-  unzip: 
-    cmd: stages/02_unzip.sh
-    deps:
-      - stages/02_unzip.sh
-      - download
-    outs:
-      - raw
   build: 
-    cmd: stages/03_build.sh
+    cmd: stages/02_build.sh
     deps:
-      - stages/03_build.sh
-      - stages/csv2parquet.sh
-      - raw
+      - stages/02_build.sh
+      - stages/column_mappings.yaml
+      - stages/csv2parquet.py
+      - download
     outs:
       - brick

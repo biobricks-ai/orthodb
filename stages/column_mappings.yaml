@@ -1,0 +1,121 @@
+# OrthoDB v12 table schema.
+#
+# Column mappings generated from OrthoDB v12
+# README.txt.
+#
+# Each file's columns are mapped to
+# descriptive snake_case names which are
+# defined here.
+
+files:
+  odb12v0_species.tab.gz:
+    columns:
+      - name: tax_id
+        description: NCBI tax id
+      - name: organism_id
+        description: Ortho DB individual organism id, based on NCBI tax id
+      - name: scientific_name
+        description: scientific name inherited from the most relevant NCBI tax id
+      - name: assembly_id
+        description: genome asssembly id, when available
+      - name: gene_count
+        description: total count of clustered genes in this species
+      - name: og_count
+        description: total count of the OGs it participates
+      - name: mapping_type
+        description: mapping type, clustered(C) or mapped(M)
+
+  odb12v0_levels.tab.gz:
+    columns:
+      - name: level_tax_id
+        description: level NCBI tax id
+      - name: level_name
+        description: scientific name
+      - name: total_genes
+        description: total non-redundant count of genes in all underneath clustered species
+      - name: total_ogs
+        description: total count of OGs built on it
+      - name: total_species
+        description: total non-redundant count of species underneath
+
+  odb12v0_level2species.tab.gz:
+    columns:
+      - name: root_tax_id
+        description: top-most level NCBI tax id, one of {2, 2157, 2759, 10239}
+      - name: organism_id
+        description: Ortho DB organism id
+      - name: level_distance
+        description: number of hops between the top-most level id and the NCBI tax id assiciated with the organism
+      - name: level_path
+        description: ordered list of Ortho DB selected intermediate levels from the top-most level to the bottom one
+
+  odb12v0_genes.tab.gz:
+    columns:
+      - name: gene_id
+        description: Ortho DB unique gene id (not stable between releases)
+      - name: organism_id
+        description: Ortho DB individual organism id, composed of NCBI tax id and suffix
+      - name: sequence_id
+        description: protein original sequence id, as downloaded along with the sequence
+      - name: synonyms
+        description: semicolon-separated list of synonyms, evaluated by mapping
+      - name: uniprot_id
+        description: Uniprot id, evaluated by mapping
+      - name: ensembl_ids
+        description: semicolon-separated list of ids from Ensembl, evaluated by mapping
+      - name: ncbi_gene_id
+        description: NCBI gid or gene name, evaluated by mapping
+      - name: description
+        description: description, evaluated by mapping
+      - name: genomic_coords
+        description: genomic coordinates relative to genomic DNA, from the source GBFF data
+      - name: genomic_dna_id
+        description: genomic DNA id
+      - name: chromosome
+        description: chromosome
+
+  odb12v0_gene_xrefs.tab.gz:
+    columns:
+      - name: gene_id
+        description: Ortho DB gene id
+      - name: xref_id
+        description: external gene identifier, either mapped or the original sequence id from Genes table
+      - name: source_db
+        description: external DB name, one of {GOterm, InterPro, NCBIproteinGI, UniProt, ENSEMBL, NCBIgid, NCBIgenename}
+
+  odb12v0_OGs.tab.gz:
+    columns:
+      - name: og_id
+        description: OG unique id (not stable and re-used between releases)
+      - name: level_tax_id
+        description: level tax_id on which the group was built
+      - name: og_name
+        description: OG name (the most common gene name within the group)
+
+  odb12v0_OG2genes.tab.gz:
+    columns:
+      - name: og_id
+        description: OG unique id
+      - name: gene_id
+        description: Ortho DB gene id
+
+  odb12v0_OG_pairs.tab.gz:
+    columns:
+      - name: descendant_og_id
+        description: descendant OG id
+      - name: antecedent_og_id
+        description: antecedent OG id
+
+  odb12v0_OG_xrefs.tab.gz:
+    columns:
+      - name: og_id
+        description: OG unique id
+      - name: db_name
+        description: external DB or DB section
+      - name: xref_id
+        description: external identifier
+      - name: gene_count
+        description: number of genes in the OG associated with the identifier
+
+  odb12v0_aa_fasta.gz:
+    description: Amino acid FASTA sequences file (no columns to define)
