@@ -1,2 +1,33 @@
 schema: '2.0'
-stages: {}
+stages:
+  download:
+    cmd: stages/01_download.sh
+    deps:
+    - path: stages/01_download.sh
+      hash: md5
+      md5: 57e52532791f311f0ad2a5dad3a5babb
+      size: 847
+    outs:
+    - path: download
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+    - path: list
+      hash: md5
+      md5: 226825f473393acae771b2c667b1519c.dir
+      size: 0
+      nfiles: 1
+  invalidate:
+    cmd: stages/00_invalidate_cache.sh
+    deps:
+    - path: stages/00_invalidate_cache.sh
+      hash: md5
+      md5: 307212003320f12935d53ed0cd70041b
+      size: 525
+    outs:
+    - path: list
+      hash: md5
+      md5: e6dc02c03f9c5d7b8d86b74a7f9d06ee.dir
+      size: 5405
+      nfiles: 1
