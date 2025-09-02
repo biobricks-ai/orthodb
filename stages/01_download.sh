@@ -6,6 +6,8 @@
 localpath=$(pwd)
 echo "Local path: $localpath"
 
+export listpath="$localpath/list"
+
 # Define the HTTP base address
 export URL='https://data.orthodb.org/v12/download/'
 
@@ -22,6 +24,8 @@ wget -P "$downloadpath" \
   -A '*.tab.gz,*.txt' \
   --no-host-directories \
   --cut-dirs=2 \
-  "$URL"
+  -B "$URL" \
+  --force-html \
+  -i "$listpath/index.html"
 
 echo "Download done."
