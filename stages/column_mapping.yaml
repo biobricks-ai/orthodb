@@ -8,7 +8,7 @@
 # defined here.
 
 file:
-  odb12v0_species.tab.gz:
+  odb12v1_species.tab.gz:
     column:
       - name: tax_id
         description: NCBI tax id
@@ -27,7 +27,7 @@ file:
       - name: mapping_type
         description: mapping type, clustered(C) or mapped(M)
 
-  odb12v0_levels.tab.gz:
+  odb12v1_levels.tab.gz:
     format:
       nullstr: '\N'
     column:
@@ -45,7 +45,7 @@ file:
         description: total non-redundant count of species underneath
         type: INTEGER
 
-  odb12v0_level2species.tab.gz:
+  odb12v1_level2species.tab.gz:
     column:
       - name: root_tax_id
         description: top-most level NCBI tax id, one of {2, 2157, 2759, 10239}
@@ -57,7 +57,7 @@ file:
       - name: level_path
         description: ordered list of Ortho DB selected intermediate levels from the top-most level to the bottom one
 
-  odb12v0_genes.tab.gz:
+  odb12v1_genes.tab.gz:
     column:
       - name: gene_id
         description: Ortho DB unique gene id (not stable between releases)
@@ -82,7 +82,7 @@ file:
       - name: chromosome
         description: chromosome
 
-  odb12v0_gene_xrefs.tab.gz:
+  odb12v1_gene_xrefs.tab.gz:
     column:
       - name: gene_id
         description: Ortho DB gene id
@@ -91,7 +91,7 @@ file:
       - name: source_db
         description: external DB name, one of {GOterm, InterPro, NCBIproteinGI, UniProt, ENSEMBL, NCBIgid, NCBIgenename}
 
-  odb12v0_OGs.tab.gz:
+  odb12v1_OGs.tab.gz:
     format:
       nullstr: '\N'
     column:
@@ -103,21 +103,21 @@ file:
         description: OG name (the most common gene name within the group)
         nullable: true
 
-  odb12v0_OG2genes.tab.gz:
+  odb12v1_OG2genes.tab.gz:
     column:
       - name: og_id
         description: OG unique id
       - name: gene_id
         description: Ortho DB gene id
 
-  odb12v0_OG_pairs.tab.gz:
+  odb12v1_OG_pairs.tab.gz:
     column:
       - name: descendant_og_id
         description: descendant OG id
       - name: antecedent_og_id
         description: antecedent OG id
 
-  odb12v0_OG_xrefs.tab.gz:
+  odb12v1_OG_xrefs.tab.gz:
     column:
       - name: og_id
         description: OG unique id
@@ -129,5 +129,5 @@ file:
         description: number of genes in the OG associated with the identifier
         type: INTEGER
 
-  odb12v0_aa_fasta.gz:
+  odb12v1_aa_fasta.gz:
     description: Amino acid FASTA sequences file (no columns to define)
