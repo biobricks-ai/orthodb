@@ -12,6 +12,7 @@ stages:
   invalidate:
     cmd: stages/00_invalidate_cache.sh
     deps:
+      - 'https://data.orthodb.org/v12/download/'
       - stages/00_invalidate_cache.sh
     outs:
       - list
