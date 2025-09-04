@@ -1,2 +1,63 @@
 schema: '2.0'
-stages: {}
+stages:
+  invalidate:
+    cmd: stages/00_invalidate_cache.sh
+    deps:
+    - path: https://data.orthodb.org/v12/download/
+      hash: md5
+      checksum: '"67f56b68-1555"'
+      size: 5461
+    - path: stages/00_invalidate_cache.sh
+      hash: md5
+      md5: 0e807f84b8b6d7cea73837a770e520a6
+      size: 539
+    outs:
+    - path: list
+      hash: md5
+      md5: 8cdf16c785a9b4d95e5938b1703eaf6d.dir
+      size: 5461
+      nfiles: 1
+  download:
+    cmd: stages/01_download.sh
+    deps:
+    - path: list
+      hash: md5
+      md5: 8cdf16c785a9b4d95e5938b1703eaf6d.dir
+      size: 5461
+      nfiles: 1
+    - path: stages/01_download.sh
+      hash: md5
+      md5: 82c598fa54ac4d3a211e791fabd64109
+      size: 809
+    outs:
+    - path: download
+      hash: md5
+      md5: a1245f5d91958f26f5024e7ba69a551b.dir
+      size: 14961625664
+      nfiles: 10
+  build:
+    cmd: stages/02_build.sh
+    deps:
+    - path: download
+      hash: md5
+      md5: a1245f5d91958f26f5024e7ba69a551b.dir
+      size: 14961625664
+      nfiles: 10
+    - path: stages/02_build.sh
+      hash: md5
+      md5: 69623ed8d7a5d589beed40d209069397
+      size: 381
+    - path: stages/column_mapping.yaml
+      hash: md5
+      md5: 62edaa85485184e6929337e47a23abbf
+      size: 4570
+    - path: stages/csv2parquet.py
+      hash: md5
+      md5: dfef1e0fbd56f80075650eae3764957d
+      size: 3418
+    outs:
+    - path: brick
+      hash: md5
+      md5: 221b6fe7c63ed767f4e9a06f03b9f877.dir
+      size: 20927338606
+      nfiles: 9
