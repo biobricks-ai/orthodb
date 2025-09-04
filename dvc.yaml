@@ -3,15 +3,16 @@
 
 # The complete process can be executed using:
 # dvc repro
-# If you want to force redoing the process use 
+# If you want to force redoing the process use
 # dvc repro -f
-# Individual stage can be executed using: 
+# Individual stage can be executed using:
 # dvc repro <stage>
 
 stages:
   invalidate:
     cmd: stages/00_invalidate_cache.sh
     deps:
+      - 'https://data.orthodb.org/v12/download/'
       - stages/00_invalidate_cache.sh
     outs:
       - list
@@ -22,11 +23,11 @@ stages:
       - list
     outs:
       - download
-  build: 
+  build:
     cmd: stages/02_build.sh
     deps:
       - stages/02_build.sh
-      - stages/column_mappings.yaml
+      - stages/column_mapping.yaml
       - stages/csv2parquet.py
       - download
     outs:
