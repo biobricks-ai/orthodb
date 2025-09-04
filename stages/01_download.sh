@@ -19,13 +19,16 @@ cd $downloadpath;
 
 # Retrieve the list of files to download from FTP base address
 # NOTE: Not downloading the larger FASTA files for now.
-wget -P "$downloadpath" \
-  --mirror -np \
-  -A '*.tab.gz,*.txt' \
-  --no-host-directories \
-  --cut-dirs=2 \
-  -B "$URL" \
-  --force-html \
-  -i "$listpath/index.html"
+grep -oP 'https?\S+' "$listpath"/index.html \
+	| grep -vP '.*_fasta\.t?gz$' \
+	| grep -P '.*(\.tab\.gz|\.txt)$' \
+	| wget -P "$downloadpath" \
+		--mirror -np \
+		-A '*.tab.gz,*.txt' \
+		-R '*_fasta.gz,*_fasta.tgz' \
+		--no-host-directories \
+		--cut-dirs=2 \
+		-B "$URL" \
+		-i -
 
 echo "Download done."
